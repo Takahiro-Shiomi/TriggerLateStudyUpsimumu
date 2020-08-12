@@ -288,6 +288,7 @@ public :
    virtual void     Draw(TString pdf);
    virtual void     End();
    virtual bool     Offline();
+   virtual bool     HLT();
    virtual bool     Match();
    virtual void     Mass();
    virtual bool     HotRoI(int tgc);

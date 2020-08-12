@@ -11,7 +11,8 @@ void TriggerLateStudy::FillHist()
     Clear();
     if(muon_n>=2){
         bool off = Offline();
-        if(off){
+        bool hlt = HLT();
+        if(off && !hlt){
             if(TGC_Run3_n>=1){TGC_Run3();}
             if(muctpi_ndatawords>=1){RPC_Run3();}
             if(roi_pt.size()>=2){

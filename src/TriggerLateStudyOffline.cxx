@@ -35,8 +35,9 @@ bool TriggerLateStudy::Offline()
             float phi_cal = cos(can1phi - can2phi);
             float mass = 2*can1pt*can2pt*(eta_cal - phi_cal);
 
-            if(sqrt(mass)>=2.8&&sqrt(mass)<=3.4){
+            //if(sqrt(mass)>=2.8&&sqrt(mass)<=3.4){
             //if(sqrt(mass)>=5.166&&sqrt(mass)<=5.526){
+            if(sqrt(mass)>=9&&sqrt(mass)<=10.6){
                 off_eta.push_back(can1eta);
                 off_eta.push_back(can2eta);
                 off_phi.push_back(can1phi);

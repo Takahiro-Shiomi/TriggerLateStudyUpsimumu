@@ -27,13 +27,16 @@ void TriggerLateStudy::Draw(TString pdf)
     c1->Clear();
 
     h_mass->Draw();
-    h_mass->SetLineColor(kOrange);
-    h_mass->SetFillColor(kOrange);
+    h_mass->SetLineColor(kAzure-4);
+    h_mass->SetFillColor(kAzure-4);
     h_mass->SetFillStyle(3015);
+    h_mass->Fit("gaus");
     c1->Print(pdf,"pdf");
 
     h_dR->Draw();
-    h_dR->SetLineColor(kAzure);
+    h_dR->SetLineColor(kAzure-4);
+    h_dR->SetFillColor(kAzure-4);
+    h_dR->SetFillStyle(3015);
     c1->Print(pdf,"pdf");
 
     c1 -> Print( pdf + "]", "pdf" );

@@ -21,6 +21,7 @@ add_library(src
     TriggerLateStudyRPC.cxx
     TriggerLateStudyMass.cxx
     TriggerLateStudyHotRoI.cxx
+    TriggerLateStudyHLT.cxx
 )
 target_include_directories(src
     PUBLIC 

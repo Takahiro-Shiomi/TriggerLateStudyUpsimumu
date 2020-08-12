@@ -2,7 +2,7 @@
 cp ../build/test/TriggerLateStudy.out .
 
 INPUT_NTUPLE="/gpfs/fs7001/shiomi/ATLAS/Physics/Bmumu/Data/data/CW_Data_Thre_BE_0805.root"
-PDF_LABEL="TriggerLateStudy_JPsimumu_0812_Run2Data_3sta_Match"
+PDF_LABEL="TriggerLateStudy_Upsimumu_0812_Run2Data_3sta_Match"
 
 echo ""
 echo "PDF_LABEL: "${PDF_LABEL}
