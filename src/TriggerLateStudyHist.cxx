@@ -9,20 +9,28 @@
 
 void TriggerLateStudy::InitHist()
 {
-    h_mass = new TH1D("h_mass",";M^{L1}_{#mu#mu} [GeV];Events",90,0,30);
-    h_dR = new TH1D("h_dR",";#DeltaR;Events",50,0,6);
-    h_mass_B = new TH1D("h_mass_B",";M^{L1}_{#mu#mu} [GeV];Events",90,0,30);
-    h_offpt = new TH2D("h_offpt",";p^{offline}_{T};p^{offline}_{T}",30,0,30,30,0,30);
-    h_L1pt = new TH2D("h_L1pt",";p^{offline}_{T};p^{offline}_{T}",21,0,21,21,0,21);
-    h_dr = new TH2D("h_dr",";p^{offline}_{T};#DeltaR",100,0,30,100,0,1);
+    O_2mass = new TH1D("O_2mass",";M^{L1}_{#mu#mu#mu} [GeV];Events",50,0,3);
+    O_2dR = new TH1D("O_2dR",";#DeltaR;Events",50,0,1.0);
+    O_3mass = new TH1D("O_3mass",";M^{L1}_{#mu#mu#mu} [GeV];Events",50,0,3);
+    O_3dR = new TH1D("O_3dR",";#DeltaR;Events",50,0,1.0);
+    h_2mass = new TH1D("h_2mass",";M^{L1}_{#mu#mu#mu} [GeV];Events",70,0,7);
+    h_2dR = new TH1D("h_2dR",";#DeltaR;Events",50,0,1.0);
+    h_3mass = new TH1D("h_3mass",";M^{L1}_{#mu#mu#mu} [GeV];Events",70,0,7);
+    h_3dR = new TH1D("h_3dR",";#DeltaR;Events",50,0,1.0);
+    h_2MdR = new TH2D("h_2MdR",";M^{L1}_{#mu#mu#mu} [GeV];#DeltaR",70,0,7,50,0,1.0);
+    h_3MdR = new TH2D("h_3MdR",";M^{L1}_{#mu#mu#mu} [GeV];#DeltaR",70,0,7,50,0,1.0);
 }
 
 void TriggerLateStudy::End()
 {
-    if(h_mass!=0){delete h_mass;}
-    if(h_mass_B!=0){delete h_mass_B;}
-    if(h_offpt!=0){delete h_offpt;}
-    if(h_L1pt!=0){delete h_L1pt;}
-    if(h_dr!=0){delete h_dr;}
-    if(h_dR!=0){delete h_dR;}
+    if(O_2mass!=0){delete O_2mass;}
+    if(O_2dR!=0){delete O_2dR;}
+    if(O_3mass!=0){delete O_3mass;}
+    if(O_3dR!=0){delete O_3dR;}
+    if(h_2mass!=0){delete h_2mass;}
+    if(h_2dR!=0){delete h_2dR;}
+    if(h_3mass!=0){delete h_3mass;}
+    if(h_3dR!=0){delete h_3dR;}
+    if(h_2MdR!=0){delete h_2MdR;}
+    if(h_3MdR!=0){delete h_3MdR;}
 }

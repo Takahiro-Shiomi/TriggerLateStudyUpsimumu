@@ -8,48 +8,46 @@
 #include <typeinfo>
 #include "map"
 #include "TVector2.h"
+#include "TLorentzVector.h"
 
 using namespace std;
 
 void TriggerLateStudy::Mass()
 {
-    int candidate = match_pt.size();
+    int candidate = RoI_pt.size();
+    //Two muon invariant mass
     for(int i=0;i!=candidate;i++){
         for(int j=i+1;j!=candidate;j++){
 
             bool sign = false;
-            if(match_source.at(i)!=0 && match_source.at(j)!=0){
-                if(match_charge.at(i) == match_charge.at(j)){ sign=true; }
+            if(RoI_source.at(i)!=0 && RoI_source.at(j)!=0){
+                if(RoI_charge.at(i) == RoI_charge.at(j)){ sign=true; }
             }
             if(sign) continue;
 
-            float eta_cal = cosh(match_eta.at(i) - match_eta.at(j));
-            float phi_cal = cos(match_phi.at(i) - match_phi.at(j));
-            float mass = 2*match_pt.at(i)*match_pt.at(j)*(eta_cal - phi_cal);
-            h_mass->Fill(sqrt(mass));
-            h_L1pt->Fill(match_pt.at(i), match_pt.at(j));
+            TLorentzVector first;
+            first.SetPtEtaPhiM(RoI_pt.at(i),RoI_eta.at(i),RoI_phi.at(i),0.10566);
+            TLorentzVector second;
+            second.SetPtEtaPhiM(RoI_pt.at(j),RoI_eta.at(j),RoI_phi.at(j),0.10566);
+            TLorentzVector two;
+            two = first + second;
 
-            float deta =abs(match_eta.at(i) - match_eta.at(j));
-            float dphi=TVector2::Phi_mpi_pi(match_phi.at(i) - match_phi.at(j));
-            float dR=sqrt(deta*deta + dphi*dphi);
-            h_dR->Fill(dR);
-        }
-    }
-    /*
-    int candidate = RoI_pt.size();
-    for(int i=0;i!=candidate;i++){
-        for(int j=i+1;j!=candidate;j++){
-            if(RoI_pt.at(i)<=11 && RoI_pt.at(j)<=11){
-                float eta_cal = cosh(RoI_eta.at(i) - RoI_eta.at(j));
-                float phi_cal = cos(RoI_phi.at(i) - RoI_phi.at(j));
-                float mass = 2*RoI_pt.at(i)*RoI_pt.at(j)*(eta_cal - phi_cal);
-                h_mass->Fill(sqrt(mass));
-                h_L1pt->Fill(RoI_pt.at(i), RoI_pt.at(j));
-                if(off_pt.size()>=2){
-                    h_mass_B->Fill(sqrt(mass));
-                }
+            h_2mass->Fill(two.M());
+            h_2dR->Fill(first.DeltaR(second));
+            h_2MdR->Fill(two.M(),first.DeltaR(second));
+            
+            for(int k=0;k!=candidate;k++){
+                if(k==i||k==j){continue;}
+                TLorentzVector third;
+                third.SetPtEtaPhiM(RoI_pt.at(k),RoI_eta.at(k),RoI_phi.at(k),0.10566);
+
+                TLorentzVector three;
+                three = two + third;
+
+                h_3mass->Fill(three.M());
+                h_3dR->Fill(third.DeltaR(two));
+                h_3MdR->Fill(three.M(),third.DeltaR(two));
             }
         }
     }
-    */
 }

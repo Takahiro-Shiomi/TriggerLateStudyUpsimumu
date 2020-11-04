@@ -10,9 +10,8 @@
 
 using namespace std;
 
-bool TriggerLateStudy::Offline()
+void TriggerLateStudy::Offline()
 {
-    if(muon_n<2){return false;}
     for(int i=0; i!=muon_n; i++){
         if((*muon_author)[i]!=1 || (*muon_Type)[i]!=0){continue;}
         float can1eta = (*muon_eta)[i];
@@ -28,32 +27,34 @@ bool TriggerLateStudy::Offline()
             float can2phi = (*muon_phi)[j];
             float can2pt = (*muon_pt)[j]/1000;
             float can2m = (*muon_m)[j]/1000;
+            if((*muon_charge)[i] == (*muon_charge)[j]){continue;}
             TLorentzVector can2;
-            can1.SetPtEtaPhiM(can2pt,can2eta,can2phi,can2m);
+            can2.SetPtEtaPhiM(can2pt,can2eta,can2phi,can2m);
 
-            float eta_cal = cosh(can1eta - can2eta);
-            float phi_cal = cos(can1phi - can2phi);
-            float mass = 2*can1pt*can2pt*(eta_cal - phi_cal);
+            TLorentzVector two;
+            two = can1 + can2;
 
-            //if(sqrt(mass)>=2.8&&sqrt(mass)<=3.4){
-            //if(sqrt(mass)>=5.166&&sqrt(mass)<=5.526){
-            if(sqrt(mass)>=9&&sqrt(mass)<=10.6){
-                off_eta.push_back(can1eta);
-                off_eta.push_back(can2eta);
-                off_phi.push_back(can1phi);
-                off_phi.push_back(can2phi);
-                off_pt.push_back(can1pt);
-                off_pt.push_back(can2pt);
-                h_offpt->Fill(can1pt,can2pt);
+            O_2mass->Fill(two.M());
+            O_2dR->Fill(can1.DeltaR(can2));
+
+            for(int k=0;k!=muon_n;k++){
+                if(k==i||k==j){continue;}
+                TLorentzVector can3;
+                can3.SetPtEtaPhiM((*muon_pt)[k]/1000,(*muon_eta)[k],(*muon_phi)[k],(*muon_m)[k]/1000);
+
+                TLorentzVector three;
+                three = can3 + two;
+
+                O_3mass->Fill(three.M());
+                O_3dR->Fill(can3.DeltaR(two));
             }
         }
     }
-    if(off_eta.size()>0){return true;}
-    else {return false;}
 }
 
 bool TriggerLateStudy::Match()
 {
+    /*
     int roi[(int)off_pt.size()];
     for(int i=0; i!=(int)off_pt.size(); i++){roi[i]=-100;}
 
@@ -108,5 +109,6 @@ bool TriggerLateStudy::Match()
     }
     if(match_pt.size()>=2){return true;}
     else{return false;}
+    */
 }
 

@@ -20,10 +20,10 @@ void TriggerLateStudy::RPC_Run3()
         float Run3_pt=9999999;
         if(rpc_pt==1){Run3_pt=4;}
         if(rpc_pt==2){Run3_pt=6;}
-        if(rpc_pt==3){Run3_pt=10;}
-        if(rpc_pt==4){Run3_pt=10;}
-        if(rpc_pt==5){Run3_pt=20;}
-        if(rpc_pt==6){Run3_pt=20;}
+        if(rpc_pt==3){Run3_pt=7;}
+        if(rpc_pt==4){Run3_pt=8;}
+        if(rpc_pt==5){Run3_pt=12;}
+        if(rpc_pt==6){Run3_pt=14;}
         if(Run3_pt>20){continue;}
 
         float rpc_eta = (*muctpi_eta)[j];

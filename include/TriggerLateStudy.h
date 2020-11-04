@@ -243,10 +243,6 @@ public :
    TBranch        *b_TGC_Run3_Charge;   //!
 
    //Parameter
-   vector<float> off_eta;
-   vector<float> off_phi;
-   vector<float> off_pt;
-
    vector<float> roi_pt;
    vector<float> roi_eta;
    vector<float> roi_phi;
@@ -263,19 +259,17 @@ public :
    vector<int>   RoI_charge;
    vector<int>   RoI_source;
 
-   vector<float> match_pt;
-   vector<float> match_eta;
-   vector<float> match_phi;
-   vector<int>   match_charge;
-   vector<int>   match_source;
-
    //Histgram
-   TH1D *h_mass;
-   TH1D *h_mass_B;
-   TH2D *h_offpt;
-   TH2D *h_L1pt;
-   TH2D *h_dr;
-   TH1D *h_dR;
+   TH1D *O_3mass;
+   TH1D *O_3dR;
+   TH1D *O_2mass;
+   TH1D *O_2dR;
+   TH1D *h_2mass;
+   TH1D *h_2dR;
+   TH1D *h_3mass;
+   TH1D *h_3dR;
+   TH2D *h_2MdR;
+   TH2D *h_3MdR;
 
    TriggerLateStudy(TTree *tree=0);
    virtual ~TriggerLateStudy();
@@ -287,7 +281,7 @@ public :
    virtual void     FillHist();
    virtual void     Draw(TString pdf);
    virtual void     End();
-   virtual bool     Offline();
+   virtual void     Offline();
    virtual bool     HLT();
    virtual bool     Match();
    virtual void     Mass();

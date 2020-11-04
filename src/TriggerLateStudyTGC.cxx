@@ -14,7 +14,7 @@ void TriggerLateStudy::TGC_Run3()
 {
     for(int j=0;j!=TGC_Run3_n;j++){
         if(TGC_Run3_type->at(j)!=2)continue;
-        if(TGC_Run3_station->at(j)!=0)continue;
+        //if(TGC_Run3_station->at(j)!=0)continue;
          
         bool flag = HotRoI(j);
         if(flag){continue;}
