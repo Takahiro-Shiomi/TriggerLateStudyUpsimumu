@@ -41,6 +41,7 @@ void TriggerLateStudy::RPC_Run3()
         roi_source.push_back(rpc_source);
         roi_side.push_back(rpc_side);
         roi_ovlp.push_back(false);
+        roi_match.push_back(false);
         roi_charge.push_back(2);
     }
 }

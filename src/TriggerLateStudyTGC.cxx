@@ -71,6 +71,7 @@ void TriggerLateStudy::TGC_Run3()
         roi_source.push_back(TGC_source);
         roi_sector.push_back(TGC_sector);
         roi_ovlp.push_back(false);
+        roi_match.push_back(false);
         if(TGC_side == 0){
             if((*TGC_Run3_Charge)[j] == 0){ roi_charge.push_back(0); }
             else if((*TGC_Run3_Charge)[j] == 1){ roi_charge.push_back(1); }

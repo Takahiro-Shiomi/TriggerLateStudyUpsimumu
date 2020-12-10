@@ -243,6 +243,14 @@ public :
    TBranch        *b_TGC_Run3_Charge;   //!
 
    //Parameter
+   vector<float> tau_pt;
+   vector<float> tau_dr;
+   vector<float> tau_eta;
+   vector<float> tau_phi;
+
+   vector<float> off_eta;
+   vector<float> off_phi;
+
    vector<float> roi_pt;
    vector<float> roi_eta;
    vector<float> roi_phi;
@@ -252,6 +260,7 @@ public :
    vector<int>   roi_side;
    vector<bool>  roi_ovlp;
    vector<int>   roi_charge;
+   vector<bool>  roi_match;
 
    vector<float> RoI_pt;
    vector<float> RoI_eta;
@@ -266,10 +275,17 @@ public :
    TH1D *O_2dR;
    TH1D *h_2mass;
    TH1D *h_2dR;
+   TH1D *h_dr;
    TH1D *h_3mass;
    TH1D *h_3dR;
    TH2D *h_2MdR;
    TH2D *h_3MdR;
+   TH1D *A_eta;
+   TH1D *O_pt;
+   TH1D *O_dR;
+   TH1D *R_pt;
+   TH1D *R_dR;
+   TH1D *Tau_dR;
 
    TriggerLateStudy(TTree *tree=0);
    virtual ~TriggerLateStudy();
@@ -283,8 +299,9 @@ public :
    virtual void     End();
    virtual void     Offline();
    virtual bool     HLT();
-   virtual bool     Match();
+   virtual void     Match();
    virtual void     Mass();
+   virtual void     DR();
    virtual bool     HotRoI(int tgc);
    virtual void     TGC_Run3();
    virtual void     RPC_Run3();
