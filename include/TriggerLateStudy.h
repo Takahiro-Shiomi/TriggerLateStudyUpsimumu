@@ -252,6 +252,8 @@ public :
    vector<int>   roi_side;
    vector<bool>  roi_ovlp;
    vector<int>   roi_charge;
+   vector<bool>  roi_station;
+   vector<bool>  roi_hotroi;
 
    vector<float> RoI_pt;
    vector<float> RoI_eta;
@@ -270,6 +272,15 @@ public :
    TH1D *h_3dR;
    TH2D *h_2MdR;
    TH2D *h_3MdR;
+
+   TH2D *h_etaphi;
+   TH1D *h_late;
+   TH1D *A_eta;
+   TH1D *S_eta;
+   TH1D *H_eta;
+   TH1D *C_eta;
+   TH1D *O_eta;
+   TH1D *B_eta;
 
    TriggerLateStudy(TTree *tree=0);
    virtual ~TriggerLateStudy();
@@ -455,6 +466,7 @@ void TriggerLateStudy::Init(TTree *tree)
 
    fChain->SetBranchAddress("eventnumber", &eventnumber, &b_eventnumber);
    fChain->SetBranchAddress("bcid", &bcid, &b_bcid);
+   /*
    fChain->SetBranchAddress("trig_L1_mu_n", &trig_L1_mu_n, &b_trig_L1_mu_n);
    fChain->SetBranchAddress("trig_L1_mu_eta", &trig_L1_mu_eta, &b_trig_L1_mu_eta);
    fChain->SetBranchAddress("trig_L1_mu_phi", &trig_L1_mu_phi, &b_trig_L1_mu_phi);
@@ -464,6 +476,7 @@ void TriggerLateStudy::Init(TTree *tree)
    fChain->SetBranchAddress("trig_L1_mu_source", &trig_L1_mu_source, &b_trig_L1_mu_source);
    fChain->SetBranchAddress("trig_L1_mu_side", &trig_L1_mu_side, &b_trig_L1_mu_side);
    fChain->SetBranchAddress("trig_L1_mu_charge", &trig_L1_mu_charge, &b_trig_L1_mu_charge);
+   */
    fChain->SetBranchAddress("muon_n", &muon_n, &b_muon_n);
    fChain->SetBranchAddress("muon_pt", &muon_pt, &b_muon_pt);
    fChain->SetBranchAddress("muon_eta", &muon_eta, &b_muon_eta);
@@ -472,12 +485,14 @@ void TriggerLateStudy::Init(TTree *tree)
    fChain->SetBranchAddress("muon_charge", &muon_charge, &b_muon_charge);
    fChain->SetBranchAddress("muon_author", &muon_author, &b_muon_author);
    fChain->SetBranchAddress("muon_Type", &muon_Type, &b_muon_Type);
+   /*
    fChain->SetBranchAddress("muon_etcone20", &muon_etcone20, &b_muon_etcone20);
    fChain->SetBranchAddress("muon_etcone30", &muon_etcone30, &b_muon_etcone30);
    fChain->SetBranchAddress("muon_etcone40", &muon_etcone40, &b_muon_etcone40);
    fChain->SetBranchAddress("muon_ptcone20", &muon_ptcone20, &b_muon_ptcone20);
    fChain->SetBranchAddress("muon_ptcone30", &muon_ptcone30, &b_muon_ptcone30);
    fChain->SetBranchAddress("muon_ptcone40", &muon_ptcone40, &b_muon_ptcone40);
+   */
    fChain->SetBranchAddress("ext_mu_n", &ext_mu_n, &b_ext_mu_n);
    fChain->SetBranchAddress("ext_mu_type", &ext_mu_type, &b_ext_mu_type);
    fChain->SetBranchAddress("ext_mu_index", &ext_mu_index, &b_ext_mu_index);

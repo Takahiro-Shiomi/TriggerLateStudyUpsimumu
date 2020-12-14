@@ -13,7 +13,7 @@ bool TriggerLateStudy::HLT()
 {
     bool HLTFlag = false;
     for(int i=0; i!=HLT_info_n; i++){
-        if((*HLT_info_chain)[i] == "L1_MU20"){
+        if((*HLT_info_chain)[i] == "L1_3MU4"){
             if((*HLT_info_isPassed)[i] == 1){
                 HLTFlag = true;
             }

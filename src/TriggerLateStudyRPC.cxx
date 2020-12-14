@@ -42,5 +42,7 @@ void TriggerLateStudy::RPC_Run3()
         roi_side.push_back(rpc_side);
         roi_ovlp.push_back(false);
         roi_charge.push_back(2);
+        roi_station.push_back(true);
+        roi_hotroi.push_back(false);
     }
 }

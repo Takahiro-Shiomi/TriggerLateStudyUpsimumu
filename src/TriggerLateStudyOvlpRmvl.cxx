@@ -13,28 +13,34 @@ void TriggerLateStudy::OverlapRemoval()
 {
     int can = (int)roi_pt.size();
     for(int i=0;i!=can;i++){
-        int roi1 = roi_roi.at(i);
-        int sec1 = roi_sector.at(i);
-        int source1 = roi_source.at(i);
-        int side1 = roi_side.at(i);
+        if(roi_station.at(i) && !roi_hotroi.at(i)){
+            int roi1 = roi_roi.at(i);
+            int sec1 = roi_sector.at(i);
+            int source1 = roi_source.at(i);
+            int side1 = roi_side.at(i);
 
-        for(int j=i+1;j!=can;j++){
-            int roi2 = roi_roi.at(j);
-            int sec2 = roi_sector.at(j);
-            int source2 = roi_source.at(j);
-            int side2 = roi_side.at(j);
+            for(int j=i+1;j!=can;j++){
+                if(roi_station.at(j) && !roi_hotroi.at(j)){
+                    int roi2 = roi_roi.at(j);
+                    int sec2 = roi_sector.at(j);
+                    int source2 = roi_source.at(j);
+                    int side2 = roi_side.at(j);
 
-            bool OvlpFlag=false;
+                    bool OvlpFlag=false;
 
-            if(side1==side2){
-                if(source1==1&&source2==1){OvlpFlag = EndcapEndcap(roi1,roi2,sec1,sec2);}/*EE OvelapRemoval*/
-                else if(source1==2&&source2==2){OvlpFlag = ForwardForward(roi1,roi2,sec1,sec2);}/*FF OvelapRemoval*/
-                else if((source1==1&&source2==2)||(source1==2&&source2==1)){OvlpFlag = ForwardEndcap(source1,source2,roi1,roi2,sec1,sec2);}/*FE OvelapRemoval*/
-                else if((source1==0&&source2==1)||(source1==1&&source2==0)){OvlpFlag = BarrelEndcap(side1,side2,source1,source2,roi1,roi2,sec1,sec2);}/*BE OvelapRemoval*/
-            }
-            if(OvlpFlag){
-                roi_ovlp.at(i)=true;
-                break;
+                    if(side1==side2){
+                        if(source1==1&&source2==1){OvlpFlag = EndcapEndcap(roi1,roi2,sec1,sec2);}/*EE OvelapRemoval*/
+                        else if(source1==2&&source2==2){OvlpFlag = ForwardForward(roi1,roi2,sec1,sec2);}/*FF OvelapRemoval*/
+                        else if((source1==1&&source2==2)||(source1==2&&source2==1)){OvlpFlag = ForwardEndcap(source1,source2,roi1,roi2,sec1,sec2);}/*FE OvelapRemoval*/
+                        else if((source1==0&&source2==1)||(source1==1&&source2==0)){OvlpFlag = BarrelEndcap(side1,side2,source1,source2,roi1,roi2,sec1,sec2);}/*BE OvelapRemoval*/
+                    }
+                    if(OvlpFlag){
+                        h_etaphi->Fill(roi_eta.at(i),roi_phi.at(i),0.5);
+                        h_etaphi->Fill(roi_eta.at(j),roi_phi.at(j),0.5);
+                        roi_ovlp.at(i)=true;
+                        break;
+                    }
+                }
             }
         }
     }

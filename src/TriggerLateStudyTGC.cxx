@@ -14,10 +14,9 @@ void TriggerLateStudy::TGC_Run3()
 {
     for(int j=0;j!=TGC_Run3_n;j++){
         if(TGC_Run3_type->at(j)!=2)continue;
-        //if(TGC_Run3_station->at(j)!=0)continue;
-         
+
+        int station = TGC_Run3_station->at(j); 
         bool flag = HotRoI(j);
-        if(flag){continue;}
 
         int TGC_pt=TGC_Run3_pt->at(j);
         float Run3_pt=9999999;
@@ -70,6 +69,9 @@ void TriggerLateStudy::TGC_Run3()
         roi_side.push_back(TGC_side);
         roi_source.push_back(TGC_source);
         roi_sector.push_back(TGC_sector);
+        roi_hotroi.push_back(flag);
+        if(station==0){roi_station.push_back(true);}
+        if(station!=0){roi_station.push_back(false);}
         roi_ovlp.push_back(false);
         if(TGC_side == 0){
             if((*TGC_Run3_Charge)[j] == 0){ roi_charge.push_back(0); }
